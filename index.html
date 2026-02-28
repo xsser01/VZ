@@ -1,0 +1,1587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xsser01 | Hacker • Developer • Cyber Security</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --neon-green: #00ff41;
+            --matrix-green: #00ff88;
+            --dark-bg: #0a0a0a;
+            --darker-bg: #050505;
+            --terminal-bg: #0f0f0f;
+            --glitch-pink: #ff00ff;
+            --cyber-blue: #0066ff;
+            --facebook: #1877f2;
+            --instagram: #e4405f;
+            --telegram: #0088cc;
+            --whatsapp: #25d366;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background: var(--dark-bg);
+            color: var(--neon-green);
+            overflow-x: hidden;
+            line-height: 1.6;
+            cursor: none;
+        }
+        
+        /* Custom Mouse Trailer */
+        .mouse-trailer {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--neon-green);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, border-color 0.3s;
+            box-shadow: 0 0 20px var(--neon-green);
+            animation: pulse 2s infinite;
+        }
+        
+        .mouse-trailer.active {
+            width: 40px;
+            height: 40px;
+            border-color: var(--glitch-pink);
+            box-shadow: 0 0 30px var(--glitch-pink);
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.5; transform: translate(-50%, -50%) scale(1.2); }
+            100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+        
+        /* Profile Image */
+        .profile-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid var(--neon-green);
+            box-shadow: 0 0 20px var(--neon-green);
+            object-fit: cover;
+            animation: glitch 3s infinite;
+            transition: all 0.3s;
+        }
+        
+        .profile-img:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 0 40px var(--neon-green);
+        }
+        
+        /* Glitch Effect */
+        .glitch {
+            position: relative;
+            animation: glitch 3s infinite;
+        }
+        
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            2% { transform: translate(-2px, 2px); }
+            4% { transform: translate(-2px, -2px); }
+            6% { transform: translate(2px, 2px); }
+            8% { transform: translate(2px, -2px); }
+            10% { transform: translate(0); }
+            100% { transform: translate(0); }
+        }
+        
+        /* Text Flicker Effect */
+        .flicker {
+            animation: flicker 2s infinite;
+        }
+        
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            8%, 10% { opacity: 0.8; text-shadow: 0 0 10px var(--glitch-pink); }
+            9% { opacity: 0.4; }
+            92%, 94% { opacity: 0.6; text-shadow: 0 0 20px var(--cyber-blue); }
+            93% { opacity: 0.2; }
+        }
+        
+        /* Matrix Rain */
+        #matrix {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+        }
+        
+        /* Terminal Style */
+        .terminal {
+            background: var(--terminal-bg);
+            border: 2px solid var(--neon-green);
+            border-radius: 10px;
+            padding: 30px;
+            margin: 20px;
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.2);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .terminal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .terminal::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--neon-green), var(--glitch-pink), var(--cyber-blue));
+            animation: borderGlow 3s infinite;
+        }
+        
+        @keyframes borderGlow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(0, 255, 65, 0.3);
+        }
+        
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            animation: breathe 2s infinite;
+        }
+        
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+        }
+        
+        .red { background: #ff5f56; animation-delay: 0s; }
+        .yellow { background: #ffbd2e; animation-delay: 0.2s; }
+        .green { background: #27ca3f; animation-delay: 0.4s; }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(5, 5, 5, 0.95);
+            padding: 15px 5%;
+            z-index: 1000;
+            border-bottom: 1px solid var(--neon-green);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--neon-green);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            color: var(--glitch-pink);
+            animation: rotate 4s infinite;
+        }
+        
+        @keyframes rotate {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(10deg); }
+            75% { transform: rotate(-10deg); }
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--matrix-green);
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+            padding: 5px 15px;
+            border: 1px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .nav-links a:hover::before {
+            left: 100%;
+        }
+        
+        .nav-links a:hover {
+            color: var(--neon-green);
+            border-color: var(--neon-green);
+            background: rgba(0, 255, 65, 0.1);
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 150px 5% 100px;
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px var(--neon-green);
+        }
+        
+        .hero h1 span {
+            color: var(--glitch-pink);
+        }
+        
+        .typing {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: var(--matrix-green);
+            min-height: 60px;
+        }
+        
+        .typing::after {
+            content: '|';
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        /* Social Buttons with Brand Colors */
+        .social-links {
+            display: flex;
+            gap: 20px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .social-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 25px;
+            background: rgba(0, 255, 65, 0.1);
+            border: 1px solid var(--neon-green);
+            color: var(--neon-green);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .social-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .social-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0, 255, 65, 0.3);
+        }
+        
+        .social-btn[href*="facebook"]:hover {
+            background: var(--facebook);
+            border-color: var(--facebook);
+            color: white;
+        }
+        
+        .social-btn[href*="instagram"]:hover {
+            background: var(--instagram);
+            border-color: var(--instagram);
+            color: white;
+        }
+        
+        .social-btn[href*="telegram"]:hover {
+            background: var(--telegram);
+            border-color: var(--telegram);
+            color: white;
+        }
+        
+        .social-btn[href*="whatsapp"]:hover {
+            background: var(--whatsapp);
+            border-color: var(--whatsapp);
+            color: white;
+        }
+        
+        /* Sections */
+        section {
+            padding: 100px 5%;
+            position: relative;
+        }
+        
+        /* Section Divider */
+        .section-divider {
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-green), var(--glitch-pink), var(--cyber-blue), transparent);
+            margin: 50px 0;
+            animation: dividerPulse 3s infinite;
+        }
+        
+        @keyframes dividerPulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+        
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .skill-card {
+            background: rgba(15, 15, 15, 0.8);
+            border: 1px solid rgba(0, 255, 65, 0.2);
+            border-radius: 10px;
+            padding: 30px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skill-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(0, 255, 65, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+        
+        .skill-card:hover::after {
+            transform: translateX(100%);
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--neon-green);
+            box-shadow: 0 10px 30px rgba(0, 255, 65, 0.1);
+        }
+        
+        .skill-icon {
+            font-size: 2.5rem;
+            color: var(--neon-green);
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .skill-card h3 {
+            color: var(--matrix-green);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .project-card {
+            background: rgba(15, 15, 15, 0.8);
+            border: 1px solid rgba(0, 255, 65, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--neon-green);
+            box-shadow: 0 10px 30px rgba(0, 255, 65, 0.2);
+        }
+        
+        .project-image {
+            height: 200px;
+            background: linear-gradient(45deg, var(--dark-bg), var(--darker-bg));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--neon-green);
+            font-size: 3rem;
+            border-bottom: 1px solid rgba(0, 255, 65, 0.2);
+            transition: all 0.3s;
+        }
+        
+        .project-card:hover .project-image {
+            background: linear-gradient(45deg, var(--darker-bg), var(--dark-bg));
+            color: var(--glitch-pink);
+            transform: scale(1.05);
+        }
+        
+        .project-content {
+            padding: 25px;
+        }
+        
+        .project-content h3 {
+            color: var(--matrix-green);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .tag {
+            background: rgba(0, 255, 65, 0.1);
+            color: var(--neon-green);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(0, 255, 65, 0.3);
+            transition: all 0.3s;
+        }
+        
+        .tag:hover {
+            background: var(--neon-green);
+            color: var(--dark-bg);
+            transform: scale(1.1);
+        }
+        
+        /* Contact */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 50px;
+            margin-top: 50px;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            background: rgba(15, 15, 15, 0.8);
+            border: 1px solid rgba(0, 255, 65, 0.2);
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        
+        .contact-item:hover {
+            transform: translateX(10px);
+            border-color: var(--neon-green);
+            box-shadow: -5px 5px 20px rgba(0, 255, 65, 0.1);
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 255, 65, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--neon-green);
+            font-size: 1.2rem;
+            animation: pulse 2s infinite;
+        }
+        
+        .contact-form {
+            background: rgba(15, 15, 15, 0.8);
+            padding: 40px;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 255, 65, 0.2);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--matrix-green);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            background: rgba(5, 5, 5, 0.8);
+            border: 1px solid rgba(0, 255, 65, 0.3);
+            border-radius: 5px;
+            color: var(--neon-green);
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--neon-green);
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+            transform: scale(1.02);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: transparent;
+            color: var(--neon-green);
+            border: 1px solid var(--neon-green);
+            padding: 15px 40px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Courier New', monospace;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+        
+        .submit-btn:hover {
+            background: var(--neon-green);
+            color: var(--dark-bg);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0, 255, 65, 0.3);
+        }
+        
+        /* Status Messages */
+        .status {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .success {
+            background: rgba(0, 255, 65, 0.1);
+            border: 1px solid var(--neon-green);
+            color: var(--neon-green);
+        }
+        
+        .error {
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid #ff0033;
+            color: #ff0033;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Footer */
+        footer {
+            background: rgba(5, 5, 5, 0.95);
+            padding: 50px 5%;
+            border-top: 1px solid var(--neon-green);
+            margin-top: 100px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-green), var(--glitch-pink), var(--cyber-blue), transparent);
+            animation: scanLine 3s linear infinite;
+        }
+        
+        @keyframes scanLine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            font-size: 1.5rem;
+            color: var(--neon-green);
+            margin-bottom: 20px;
+            display: block;
+            text-decoration: none;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(0, 255, 65, 0.2);
+            color: var(--matrix-green);
+            font-size: 0.9rem;
+        }
+        
+        /* Hacker ASCII Art */
+        .ascii-art {
+            font-family: monospace;
+            font-size: 0.7rem;
+            color: var(--matrix-green);
+            line-height: 1.2;
+            white-space: pre;
+            margin: 20px 0;
+            animation: glitch 5s infinite;
+        }
+        
+        /* مخفي - للمشغل */
+        .hidden-audio {
+            display: none;
+        }
+        
+        /* Live Terminal */
+        .live-terminal {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--neon-green);
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 20px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .terminal-prompt {
+            color: var(--neon-green);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .terminal-input {
+            background: transparent;
+            border: none;
+            color: var(--neon-green);
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            flex: 1;
+        }
+        
+        .terminal-input:focus {
+            outline: none;
+        }
+        
+        .terminal-output {
+            color: var(--matrix-green);
+            margin-top: 10px;
+            white-space: pre-wrap;
+        }
+        
+        /* System Status */
+        .system-status {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--neon-green);
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 0.8rem;
+            color: var(--matrix-green);
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--neon-green);
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+            animation: pulse 2s infinite;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .typing {
+                font-size: 1.2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .social-links {
+                flex-wrap: wrap;
+            }
+            
+            body {
+                cursor: auto;
+            }
+            
+            .mouse-trailer {
+                display: none;
+            }
+        }
+        
+        /* Scan Line Effect */
+        .scan-line {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(0, 255, 65, 0.3);
+            box-shadow: 0 0 10px var(--neon-green);
+            animation: scan 3s linear infinite;
+            z-index: 9999;
+            pointer-events: none;
+        }
+        
+        @keyframes scan {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+        
+        /* Terminal Cursor */
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 20px;
+            background: var(--neon-green);
+            margin-left: 5px;
+            animation: cursor-blink 1s infinite;
+            vertical-align: middle;
+        }
+        
+        @keyframes cursor-blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        /* Particle Effect */
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+        }
+    </style>
+</head>
+<body>
+    <!-- Matrix Rain Background -->
+    <canvas id="matrix"></canvas>
+    
+    <!-- Mouse Trailer -->
+    <div class="mouse-trailer" id="mouseTrailer"></div>
+    
+    <!-- Scan Line Effect -->
+    <div class="scan-line"></div>
+    
+    <!-- System Status -->
+    <div class="system-status">
+        <span class="status-dot"></span>
+        <span id="uptime">System Uptime: 99.9%</span> | 
+        <span id="location">Last Location: Cyberspace</span>
+    </div>
+    
+    <!-- Navigation -->
+    <nav>
+        <a href="#home" class="logo glitch">
+            <i class="fas fa-terminal"></i>
+            <span class="flicker">xsser01</span>
+        </a>
+        
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="terminal">
+            <div class="terminal-header">
+                <div class="terminal-dot red"></div>
+                <div class="terminal-dot yellow"></div>
+                <div class="terminal-dot green"></div>
+                <span style="margin-left: 20px; color: var(--matrix-green);">~/xsser01</span>
+            </div>
+            
+            <!-- Profile Image -->
+            <div class="profile-container">
+                <img src="Screenshot_2026-02-18-11-02-36-08_99c04817c0de5652397fc8b56c3b3817-Picsart-AiImageEnhancer.jpg" alt="xsser01 Profile" class="profile-img" onerror="this.src='https://via.placeholder.com/120x120/00ff41/000000?text=xsser01'">
+            </div>
+            
+            <h1><span>&gt;</span> <span class="flicker">xsser01</span><span class="cursor"></span></h1>
+            
+            <div class="typing" id="typingText">
+                // Ethical Hacker • Security Researcher • Developer
+            </div>
+            
+            <div class="ascii-art">
+  ██╗  ██╗███████╗███████╗███████╗██████╗ ██████╗ ██╗
+  ╚██╗██╔╝██╔════╝██╔════╝██╔════╝██╔══██╗██╔══██╗██║
+   ╚███╔╝ ███████╗███████╗█████╗  ██████╔╝██████╔╝██║
+   ██╔██╗ ╚════██║╚════██║██╔══╝  ██╔══██╗██╔═══╝ ██║
+  ██╔╝ ██╗███████║███████║███████╗██║  ██║██║     ██║
+  ╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝
+            </div>
+            
+            <!-- Live Terminal -->
+            <div class="live-terminal">
+                <div class="terminal-prompt">
+                    <span>root@xsser01:~$</span>
+                    <input type="text" class="terminal-input" id="terminalInput" placeholder="Enter command (help)">
+                </div>
+                <div class="terminal-output" id="terminalOutput"></div>
+            </div>
+            
+            <div class="social-links">
+                <a href="https://t.me/xsser01" class="social-btn" target="_blank">
+                    <i class="fab fa-telegram"></i>
+                    Telegram
+                </a>
+                <a href="https://www.facebook.com/xsser01" class="social-btn" target="_blank">
+                    <i class="fab fa-facebook"></i>
+                    Facebook
+                </a>
+                <a href="https://www.instagram.com/xsser_01" class="social-btn" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                    Instagram
+                </a>
+                <a href="https://wa.me/213795889151" class="social-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                    WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
+    
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="terminal">
+            <div class="terminal-header">
+                <div class="terminal-dot red"></div>
+                <div class="terminal-dot yellow"></div>
+                <div class="terminal-dot green"></div>
+                <span style="margin-left: 20px; color: var(--matrix-green);">~/skills</span>
+            </div>
+            
+            <h2 style="color: var(--matrix-green); margin-bottom: 30px;">&gt; Skills & Expertise</h2>
+            
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Cyber Security</h3>
+                    <p>Penetration Testing, Vulnerability Assessment, Network Security, Ethical Hacking</p>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Web Development</h3>
+                    <p>HTML5, CSS3, JavaScript, React, Node.js, Full Stack Development</p>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <h3>Bug Bounty</h3>
+                    <p>Cross-Site Scripting, SQL Injection, CSRF, Security Research, Responsible Disclosure</p>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Tools & Software</h3>
+                    <p>Metasploit, Burp Suite, Nmap, Wireshark, Kali Linux, Custom Scripts</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
+    
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="terminal">
+            <div class="terminal-header">
+                <div class="terminal-dot red"></div>
+                <div class="terminal-dot yellow"></div>
+                <div class="terminal-dot green"></div>
+                <span style="margin-left: 20px; color: var(--matrix-green);">~/projects</span>
+            </div>
+            
+            <h2 style="color: var(--matrix-green); margin-bottom: 30px;">&gt; Recent Projects</h2>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-user-secret"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Protocol X Game</h3>
+                        <p>Interactive puzzle game with 50 levels, scoring system, and encryption challenges.</p>
+                        <div class="project-tags">
+                            <span class="tag">HTML5</span>
+                            <span class="tag">CSS3</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">Encryption</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Security Scanner</h3>
+                        <p>Custom web vulnerability scanner for XSS, SQLi, and CSRF detection.</p>
+                        <div class="project-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">Security</span>
+                            <span class="tag">Automation</span>
+                            <span class="tag">Pentesting</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Hacker Portfolio</h3>
+                        <p>Interactive portfolio website with terminal-style interface and animations.</p>
+                        <div class="project-tags">
+                            <span class="tag">Web Design</span>
+                            <span class="tag">Animation</span>
+                            <span class="tag">Creative</span>
+                            <span class="tag">UI/UX</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="terminal">
+            <div class="terminal-header">
+                <div class="terminal-dot red"></div>
+                <div class="terminal-dot yellow"></div>
+                <div class="terminal-dot green"></div>
+                <span style="margin-left: 20px; color: var(--matrix-green);">~/contact</span>
+            </div>
+            
+            <h2 style="color: var(--matrix-green); margin-bottom: 30px;">&gt; Get In Touch</h2>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h4>Email</h4>
+                            <p>psosoej210@gmail.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-telegram"></i>
+                        </div>
+                        <div>
+                            <h4>Telegram</h4>
+                            <p>@xsser01</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div>
+                            <h4>WhatsApp</h4>
+                            <p>+213 795 889 151</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" class="form-control" required></textarea>
+                    </div>
+                    
+                    <div id="statusMessage" class="status"></div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i>
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div>
+                <a href="#home" class="footer-logo flicker">xsser01</a>
+                <p style="color: var(--matrix-green); margin-bottom: 20px;">
+                    Ethical Hacker • Security Researcher • Developer
+                </p>
+                <div class="social-links">
+                    <a href="https://t.me/xsser01" class="social-btn" target="_blank">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                    <a href="https://www.facebook.com/Hu16x" class="social-btn" target="_blank">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="https://www.instagram.com/xsser_01" class="social-btn" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://wa.me/213795889151" class="social-btn" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div>
+                <h3 style="color: var(--neon-green); margin-bottom: 20px;">Quick Links</h3>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <a href="#home" style="color: var(--matrix-green); text-decoration: none;">Home</a>
+                    <a href="#skills" style="color: var(--matrix-green); text-decoration: none;">Skills</a>
+                    <a href="#projects" style="color: var(--matrix-green); text-decoration: none;">Projects</a>
+                    <a href="#contact" style="color: var(--matrix-green); text-decoration: none;">Contact</a>
+                </div>
+            </div>
+            
+            <div>
+                <h3 style="color: var(--neon-green); margin-bottom: 20px;">Contact Info</h3>
+                <div style="color: var(--matrix-green); line-height: 1.8;">
+                    <p>Email: psosoej210@gmail.com</p>
+                    <p>Telegram: @xsser01</p>
+                    <p>WhatsApp: +213 795 889 151</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2026 xsser01. All systems operational. <span style="color: var(--neon-green);">Access Granted.</span></p>
+        </div>
+    </footer>
+
+    <!-- عنصر الصوت المخفي -->
+    <audio id="bg-music" class="hidden-audio" loop>
+        <source src="223.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Matrix Rain Effect with Mouse Interaction
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789$+-*/=%"#&_(),.;:?!\\|{}<>[]^~';
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        
+        const drops = [];
+        const dropsIntensity = [];
+        for(let i = 0; i < columns; i++) {
+            drops[i] = 1;
+            dropsIntensity[i] = 0.3;
+        }
+        
+        let mouseX = -100, mouseY = -100;
+        
+        canvas.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+        
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(10, 10, 10, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            for(let i = 0; i < drops.length; i++) {
+                // Adjust intensity based on mouse position
+                const x = i * fontSize;
+                const y = drops[i] * fontSize;
+                const distToMouse = Math.sqrt(Math.pow(x - mouseX, 2) + Math.pow(y - mouseY, 2));
+                const intensity = Math.max(0.3, 1 - distToMouse / 200);
+                
+                ctx.fillStyle = `rgba(0, 255, ${Math.floor(100 + intensity * 155)}, ${intensity})`;
+                ctx.font = fontSize + 'px monospace';
+                
+                const text = letters[Math.floor(Math.random() * letters.length)];
+                ctx.fillText(text, x, y);
+                
+                if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+        
+        setInterval(drawMatrix, 50);
+        
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+        
+        // Mouse Trailer Effect
+        const trailer = document.getElementById('mouseTrailer');
+        
+        document.addEventListener('mousemove', (e) => {
+            trailer.style.left = e.clientX + 'px';
+            trailer.style.top = e.clientY + 'px';
+            
+            // Add active class when over interactive elements
+            const target = e.target;
+            if(target.closest('a') || target.closest('button') || target.closest('.social-btn') || target.closest('.skill-card') || target.closest('.project-card')) {
+                trailer.classList.add('active');
+            } else {
+                trailer.classList.remove('active');
+            }
+        });
+        
+        // Scroll Animation
+        const terminals = document.querySelectorAll('.terminal');
+        
+        function checkScroll() {
+            terminals.forEach(terminal => {
+                const rect = terminal.getBoundingClientRect();
+                const isVisible = rect.top < window.innerHeight - 100 && rect.bottom > 100;
+                
+                if(isVisible) {
+                    terminal.classList.add('visible');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', checkScroll);
+        window.addEventListener('load', checkScroll);
+        
+        // Typing Effect with Multiple Texts
+        const typingText = document.getElementById('typingText');
+        const texts = [
+            '// Ethical Hacker • Security Researcher • Developer',
+            '// Bug Bounty Hunter • Penetration Tester',
+            '// Web Developer • Security Consultant',
+            '// xsser01 @ root ~'
+        ];
+        
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        
+        function type() {
+            const currentText = texts[textIndex];
+            
+            if(isDeleting) {
+                typingText.textContent = '// ' + currentText.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingText.textContent = '// ' + currentText.substring(0, charIndex + 1);
+                charIndex++;
+            }
+            
+            if(!isDeleting && charIndex === currentText.length) {
+                isDeleting = true;
+                setTimeout(type, 2000);
+            } else if(isDeleting && charIndex === 0) {
+                isDeleting = false;
+                textIndex = (textIndex + 1) % texts.length;
+                setTimeout(type, 500);
+            } else {
+                setTimeout(type, isDeleting ? 50 : 100);
+            }
+        }
+        
+        setTimeout(type, 1000);
+        
+        // Live Terminal Commands
+        const terminalInput = document.getElementById('terminalInput');
+        const terminalOutput = document.getElementById('terminalOutput');
+        
+        const commands = {
+            'help': 'Available commands: help, skills, projects, contact, clear, whoami, date, uptime',
+            'skills': 'Skills: Cyber Security, Web Development, Bug Bounty, Pentesting',
+            'projects': 'Projects: Protocol X Game, Security Scanner, Hacker Portfolio',
+            'contact': 'Contact: Email, Telegram, WhatsApp (check contact section)',
+            'whoami': 'xsser01 - Ethical Hacker • Security Researcher • Developer',
+            'date': new Date().toString(),
+            'uptime': 'System Uptime: 99.9% | Last Location: Cyberspace'
+        };
+        
+        terminalInput.addEventListener('keypress', (e) => {
+            if(e.key === 'Enter') {
+                const cmd = terminalInput.value.toLowerCase().trim();
+                let output = '';
+                
+                if(cmd === 'clear') {
+                    terminalOutput.innerHTML = '';
+                    terminalInput.value = '';
+                    return;
+                } else if(commands[cmd]) {
+                    output = commands[cmd];
+                } else if(cmd === '') {
+                    output = '';
+                } else {
+                    output = `Command not found: ${cmd}. Type 'help' for available commands.`;
+                }
+                
+                if(output) {
+                    terminalOutput.innerHTML += `<div style="color: #00ff41;">root@xsser01:~$ ${cmd}</div>`;
+                    terminalOutput.innerHTML += `<div style="color: #00ff88; margin-bottom: 5px;">${output}</div>`;
+                }
+                
+                terminalInput.value = '';
+                terminalOutput.scrollTop = terminalOutput.scrollHeight;
+            }
+        });
+        
+        // Contact Form
+        const contactForm = document.getElementById('contactForm');
+        const statusMessage = document.getElementById('statusMessage');
+        
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value
+            };
+            
+            if(!formData.name || !formData.email || !formData.message) {
+                showStatus('Please fill all required fields.', 'error');
+                return;
+            }
+            
+            const submitBtn = contactForm.querySelector('.submit-btn');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                const emailBody = `Name: ${formData.name}%0D%0AEmail: ${formData.email}%0D%0ASubject: ${formData.subject}%0D%0A%0D%0AMessage:%0D%0A${formData.message}`;
+                window.open(`mailto:psosoej210@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${emailBody}`);
+                
+                showStatus('Message sent successfully! Opening email client...', 'success');
+                contactForm.reset();
+                
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 1500);
+        });
+        
+        function showStatus(message, type) {
+            statusMessage.textContent = message;
+            statusMessage.className = `status ${type}`;
+            statusMessage.style.display = 'block';
+            
+            setTimeout(() => {
+                statusMessage.style.display = 'none';
+            }, 5000);
+        }
+        
+        // Music Player with Fade In
+        const bgMusic = document.getElementById('bg-music');
+        bgMusic.volume = 0;
+        
+        function fadeIn() {
+            let volume = 0;
+            const interval = setInterval(() => {
+                if(volume < 0.5) {
+                    volume += 0.05;
+                    bgMusic.volume = volume;
+                } else {
+                    clearInterval(interval);
+                }
+            }, 100);
+        }
+        
+        function playMusic() {
+            bgMusic.play().catch(error => {
+                console.log("Auto-play blocked, waiting for interaction");
+                
+                document.addEventListener('click', function playOnClick() {
+                    bgMusic.play();
+                    fadeIn();
+                    document.removeEventListener('click', playOnClick);
+                }, { once: true });
+            });
+        }
+        
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                playMusic();
+                fadeIn();
+            }, 1000);
+        });
+        
+        setTimeout(playMusic, 3000);
+        
+        bgMusic.addEventListener('error', function() {
+            console.log('Audio file not found or cannot be played');
+        });
+        
+        // Random Glitch Effect
+        setInterval(() => {
+            if(Math.random() > 0.7) {
+                const glitchElements = document.querySelectorAll('.glitch, .flicker');
+                glitchElements.forEach(el => {
+                    el.style.animation = 'none';
+                    setTimeout(() => {
+                        el.style.animation = 'glitch 3s infinite';
+                    }, 100);
+                });
+            }
+        }, 3000);
+        
+        // Terminal Click Effect
+        const terminalElements = document.querySelectorAll('.terminal');
+        terminalElements.forEach(terminal => {
+            terminal.addEventListener('click', function() {
+                this.style.boxShadow = '0 0 40px rgba(0, 255, 65, 0.4)';
+                setTimeout(() => {
+                    this.style.boxShadow = '0 0 30px rgba(0, 255, 65, 0.2)';
+                }, 300);
+            });
+        });
+        
+        // Hacker Quotes
+        const hackerQuotes = [
+            "Access Granted.",
+            "System Breached.",
+            "Firewall Bypassed.",
+            "Encryption Cracked.",
+            "Root Access Achieved.",
+            "Security Override.",
+            "Network Compromised.",
+            "Data Extracted."
+        ];
+        
+        function showRandomQuote() {
+            const quote = hackerQuotes[Math.floor(Math.random() * hackerQuotes.length)];
+            console.log(`%c${quote}`, 'color: #00ff41; font-size: 16px; font-weight: bold;');
+            
+            // Update location randomly
+            const locations = ['Cyberspace', 'Dark Web', 'Deep Web', 'Secure Network', 'Government System', 'Corporate Server'];
+            document.getElementById('location').textContent = `Last Location: ${locations[Math.floor(Math.random() * locations.length)]}`;
+        }
+        
+        setInterval(showRandomQuote, 30000);
+        showRandomQuote();
+        
+        // Typing Sounds Simulation
+        document.addEventListener('keydown', function(e) {
+            if(e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+                // Visual feedback instead of sound
+                e.target.style.transform = 'scale(1.02)';
+                setTimeout(() => {
+                    e.target.style.transform = 'scale(1)';
+                }, 100);
+            }
+        });
+        
+        // Particle Effect on Click
+        document.addEventListener('click', (e) => {
+            for(let i = 0; i < 5; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = e.clientX + 'px';
+                particle.style.top = e.clientY + 'px';
+                particle.style.width = '4px';
+                particle.style.height = '4px';
+                particle.style.background = '#00ff41';
+                particle.style.borderRadius = '50%';
+                particle.style.boxShadow = '0 0 10px #00ff41';
+                
+                const angle = (i / 5) * Math.PI * 2;
+                const velocity = 5;
+                const vx = Math.cos(angle) * velocity;
+                const vy = Math.sin(angle) * velocity;
+                
+                document.body.appendChild(particle);
+                
+                let posX = e.clientX;
+                let posY = e.clientY;
+                
+                function animate() {
+                    posX += vx;
+                    posY += vy;
+                    particle.style.left = posX + 'px';
+                    particle.style.top = posY + 'px';
+                    particle.style.opacity -= 0.02;
+                    
+                    if(particle.style.opacity > 0) {
+                        requestAnimationFrame(animate);
+                    } else {
+                        particle.remove();
+                    }
+                }
+                
+                requestAnimationFrame(animate);
+            }
+        });
+    </script>
+</body>
+</html>
