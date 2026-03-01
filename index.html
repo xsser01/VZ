@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> NEXUS://xsser01 [CYBERPUNK_EDITION] </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /*------------------------------
+        RESET & GLOBAL STYLES - DARKER THAN BLACK
+        ------------------------------*/
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #00f0ff;        // نيون أزرق كهربائي
+            --secondary: #ff00aa;       // نيون وردي صاخب
+            --tertiary: #b700ff;         // نيون بنفسجي
+            --bg-void: #030014;          // فراغ بنفسجي غامق جداً
+            --bg-deep: #0a0420;          // أعمق نقطة في الفضاء
+            --text-glitch: #ffffff;
+            --hologram: rgba(0, 240, 255, 0.2);
+            --grid-color: rgba(255, 0, 170, 0.1);
+        }
+
+        body {
+            background-color: var(--bg-void);
+            color: var(--primary);
+            font-family: 'Share Tech Mono', 'Courier New', monospace;
+            overflow-x: hidden;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        /* Grid Overlay - الشعور بالعالم الرقمي */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Glow Effect العام */
+        .glow {
+            text-shadow: 0 0 5px var(--primary), 0 0 15px var(--primary), 0 0 30px var(--secondary);
+        }
+
+        /*------------------------------
+        HOLOGRAM PROFILE - العنصر الأقوى
+        ------------------------------*/
+        .hologram-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 30px;
+            perspective: 1000px;
+        }
+
+        .hologram {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotateHologram 20s infinite linear;
+        }
+
+        .hologram-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 30px var(--primary), inset 0 0 20px var(--hologram);
+            background: radial-gradient(circle at 30% 30%, var(--hologram), transparent 70%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--primary);
+            backface-visibility: visible;
+            opacity: 0.9;
+        }
+
+        /* الأوجه ثلاثية الأبعاد */
+        .face1 { transform: rotateY(0deg) translateZ(30px); }
+        .face2 { transform: rotateY(90deg) translateZ(30px); }
+        .face3 { transform: rotateY(180deg) translateZ(30px); }
+        .face4 { transform: rotateY(-90deg) translateZ(30px); }
+        .face5 { transform: rotateX(90deg) translateZ(30px); animation: pulseGlow 2s infinite alternate; }
+        .face6 { transform: rotateX(-90deg) translateZ(30px); animation: pulseGlow 2s infinite alternate-reverse; }
+
+        @keyframes rotateHologram {
+            0% { transform: rotateX(0deg) rotateY(0deg); }
+            100% { transform: rotateX(360deg) rotateY(360deg); }
+        }
+
+        @keyframes pulseGlow {
+            from { box-shadow: 0 0 20px var(--secondary), inset 0 0 10px var(--secondary); }
+            to { box-shadow: 0 0 60px var(--primary), inset 0 0 30px var(--primary); }
+        }
+
+        /*------------------------------
+        MAIN CONTAINER - TERMINAL REIMAGINED
+        ------------------------------*/
+        .nexus-panel {
+            background: rgba(3, 0, 20, 0.7);
+            backdrop-filter: blur(15px);
+            border: 1px solid;
+            border-image: repeating-linear-gradient(45deg, var(--primary), var(--secondary), var(--tertiary)) 30;
+            box-shadow: 0 0 50px rgba(0, 240, 255, 0.2), inset 0 0 30px rgba(183, 0, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* شريط بيانات علوي */
+        .system-stats {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background: rgba(0, 240, 255, 0.05);
+            border-bottom: 1px solid var(--secondary);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+        }
+
+        .stat {
+            color: var(--secondary);
+        }
+        .stat span {
+            color: var(--primary);
+        }
+
+        /*------------------------------
+        NAVIGATION - CYBERPUNK STYLE
+        ------------------------------*/
+        .cyber-nav {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+
+        .cyber-nav a {
+            padding: 10px 25px;
+            background: rgba(255, 0, 170, 0.1);
+            border: 1px solid var(--secondary);
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            backdrop-filter: blur(5px);
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cyber-nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--secondary), transparent);
+            transition: 0.5s;
+        }
+
+        .cyber-nav a:hover::before {
+            left: 100%;
+        }
+
+        .cyber-nav a:hover {
+            background: var(--secondary);
+            color: var(--bg-void);
+            box-shadow: 0 0 30px var(--secondary);
+        }
+
+        /*------------------------------
+        HERO SECTION - أقوى جزء
+        ------------------------------*/
+        .hero-quantum {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            position: relative;
+        }
+
+        .glitch-title {
+            font-size: 5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            position: relative;
+            text-shadow: 0.05em 0 0 var(--secondary), -0.05em -0.025em 0 var(--primary);
+            animation: glitch-shake 0.3s infinite alternate;
+        }
+
+        @keyframes glitch-shake {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 1px); }
+            40% { transform: translate(2px, -1px); }
+            60% { transform: translate(-1px, 2px); }
+            80% { transform: translate(1px, -2px); }
+            100% { transform: translate(0); }
+        }
+
+        .quantum-badge {
+            display: inline-block;
+            padding: 10px 30px;
+            border: 2px solid var(--primary);
+            background: rgba(0, 240, 255, 0.05);
+            font-size: 1.2rem;
+            margin: 20px 0;
+            backdrop-filter: blur(10px);
+            transform: skew(-10deg);
+            box-shadow: -5px 5px 0 var(--secondary);
+        }
+
+        /*------------------------------
+        SOCIAL - كريستالات طاقة
+        ------------------------------*/
+        .energy-links {
+            display: flex;
+            gap: 30px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .crystal-btn {
+            width: 70px;
+            height: 70px;
+            border: 2px solid var(--primary);
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--primary);
+            text-decoration: none;
+            position: relative;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            transition: 0.3s;
+            animation: floatCrystal 3s infinite ease-in-out;
+        }
+
+        .crystal-btn:nth-child(2) { animation-delay: 0.2s; border-color: var(--secondary); color: var(--secondary); }
+        .crystal-btn:nth-child(3) { animation-delay: 0.4s; border-color: var(--tertiary); color: var(--tertiary); }
+        .crystal-btn:nth-child(4) { animation-delay: 0.6s; border-color: var(--primary); color: var(--primary); }
+
+        @keyframes floatCrystal {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); filter: hue-rotate(20deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+
+        .crystal-btn:hover {
+            background: var(--primary);
+            color: var(--bg-void);
+            box-shadow: 0 0 50px var(--primary);
+            border-color: var(--primary);
+        }
+        .crystal-btn:nth-child(2):hover { background: var(--secondary); box-shadow: 0 0 50px var(--secondary); }
+        .crystal-btn:nth-child(3):hover { background: var(--tertiary); box-shadow: 0 0 50px var(--tertiary); }
+
+        /*------------------------------
+        SKILLS - بطاقات طاقة
+        ------------------------------*/
+        .skills-reactor {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .reactor-core {
+            background: rgba(255, 0, 170, 0.05);
+            border: 1px solid var(--secondary);
+            padding: 30px 20px;
+            border-radius: 15px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: 0.4s;
+            backdrop-filter: blur(5px);
+        }
+
+        .reactor-core::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(transparent, var(--secondary), transparent 70%);
+            animation: rotateReactor 6s infinite linear;
+            opacity: 0;
+            transition: 0.4s;
+            z-index: -1;
+        }
+
+        .reactor-core:hover::after {
+            opacity: 0.3;
+        }
+
+        .reactor-core:hover {
+            transform: scale(1.05);
+            border-color: var(--primary);
+            box-shadow: 0 0 40px var(--primary);
+        }
+
+        @keyframes rotateReactor {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .core-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+
+        /*------------------------------
+        PROJECTS - ثنائي الأبعاد متحرك
+        ------------------------------*/
+        .project-portal {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .portal-card {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--primary);
+            border-radius: 10px;
+            padding: 20px;
+            transition: 0.3s;
+            position: relative;
+            z-index: 1;
+        }
+
+        .portal-card::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--tertiary));
+            z-index: -1;
+            border-radius: 12px;
+            opacity: 0;
+            transition: 0.4s;
+        }
+
+        .portal-card:hover::before {
+            opacity: 1;
+        }
+
+        .portal-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .project-hologram {
+            height: 150px;
+            background: var(--hologram);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--primary);
+            border: 1px dashed var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        /*------------------------------
+        FORM - نيورال انترفيس
+        ------------------------------*/
+        .neural-form {
+            display: grid;
+            gap: 20px;
+        }
+
+        .neural-input {
+            background: rgba(0, 240, 255, 0.05);
+            border: 1px solid var(--primary);
+            padding: 15px 20px;
+            color: var(--primary);
+            font-family: inherit;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .neural-input:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 30px var(--secondary);
+            background: rgba(255, 0, 170, 0.1);
+        }
+
+        .neural-button {
+            background: transparent;
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+            padding: 15px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .neural-button:hover {
+            background: var(--secondary);
+            color: var(--bg-void);
+            box-shadow: 0 0 50px var(--secondary);
+        }
+
+        /*------------------------------
+        FOOTER - MATRIX PORTAL
+        ------------------------------*/
+        .cyber-footer {
+            border-top: 2px solid var(--secondary);
+            margin-top: 100px;
+            padding: 50px 0 20px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            position: relative;
+            z-index: 10;
+        }
+
+        /*------------------------------
+        BACKGROUND ANIMATION - جسيمات
+        ------------------------------*/
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        /*------------------------------
+        MUSIC VIZUALIZER
+        ------------------------------*/
+        .music-viz {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 9999;
+            display: flex;
+            gap: 3px;
+            align-items: flex-end;
+            height: 40px;
+        }
+        .viz-bar {
+            width: 5px;
+            height: 20px;
+            background: var(--primary);
+            animation: viz 1.2s infinite ease-in-out;
+        }
+        .viz-bar:nth-child(2) { animation-delay: 0.1s; background: var(--secondary); }
+        .viz-bar:nth-child(3) { animation-delay: 0.2s; background: var(--tertiary); }
+        .viz-bar:nth-child(4) { animation-delay: 0.3s; background: var(--primary); }
+        .viz-bar:nth-child(5) { animation-delay: 0.4s; background: var(--secondary); }
+
+        @keyframes viz {
+            0%, 100% { height: 10px; }
+            50% { height: 40px; }
+        }
+
+        /*------------------------------
+        RESPONSIVE
+        ------------------------------*/
+        @media (max-width: 768px) {
+            .glitch-title { font-size: 3rem; }
+            .cyber-nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Music Visualizer -->
+    <div class="music-viz">
+        <div class="viz-bar"></div>
+        <div class="viz-bar"></div>
+        <div class="viz-bar"></div>
+        <div class="viz-bar"></div>
+        <div class="viz-bar"></div>
+    </div>
+
+    <!-- Navigation Cyberpunk -->
+    <nav class="cyber-nav">
+        <a href="#home">[ENTER]</a>
+        <a href="#skills">[SKILLS]</a>
+        <a href="#projects">[PROJECTS]</a>
+        <a href="#contact">[CONTACT]</a>
+    </nav>
+
+    <!-- MAIN NEXUS PANEL -->
+    <main class="nexus-panel" style="max-width: 1400px; margin: 80px auto;">
+
+        <!-- System Status -->
+        <div class="system-stats">
+            <div class="stat">ROOT: <span>ACCESS GRANTED</span></div>
+            <div class="stat">ENCRYPTION: <span>AES-256</span></div>
+            <div class="stat">USER: <span>XSSER01</span></div>
+            <div class="stat">NEXUS: <span>ONLINE</span></div>
+        </div>
+
+        <!-- HOME SECTION -->
+        <section id="home" class="hero-quantum">
+            <div class="hologram-container">
+                <div class="hologram">
+                    <div class="hologram-face face1"><i class="fas fa-user-secret"></i></div>
+                    <div class="hologram-face face2"><i class="fas fa-skull"></i></div>
+                    <div class="hologram-face face3"><i class="fas fa-code"></i></div>
+                    <div class="hologram-face face4"><i class="fas fa-shield-halved"></i></div>
+                    <div class="hologram-face face5"><i class="fas fa-bolt"></i></div>
+                    <div class="hologram-face face6"><i class="fas fa-infinity"></i></div>
+                </div>
+            </div>
+
+            <h1 class="glitch-title glow">XSSER01</h1>
+            <div class="quantum-badge">
+                <span class="glow">>> CYBERPUNK // QUANTUM HACKER <<</span>
+            </div>
+
+            <div style="font-size: 1.5rem; margin: 30px 0;">
+                <span id="quantum-typing"></span>
+                <span class="cursor" style="background: var(--secondary);">_</span>
+            </div>
+
+            <!-- Social Energy Crystals -->
+            <div class="energy-links">
+                <a href="https://t.me/xsser01" class="crystal-btn" target="_blank"><i class="fab fa-telegram-plane"></i></a>
+                <a href="https://www.facebook.com/Hu16x" class="crystal-btn" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/xsser_01" class="crystal-btn" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/213795889151" class="crystal-btn" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </section>
+
+        <!-- SKILLS SECTION - Reactor Core -->
+        <section id="skills" style="margin-top: 150px;">
+            <h2 class="glitch-title" style="font-size: 3rem; text-align: center;">> SKILLS_MATRIX</h2>
+            <div class="skills-reactor">
+                <div class="reactor-core">
+                    <div class="core-icon"><i class="fas fa-shield-halved"></i></div>
+                    <h3>PENETRATION TESTING</h3>
+                    <p>Bypassing firewalls, exploiting vulnerabilities, zero-day research.</p>
+                </div>
+                <div class="reactor-core">
+                    <div class="core-icon"><i class="fas fa-bug"></i></div>
+                    <h3>BUG BOUNTY</h3>
+                    <p>XSS, SQLi, CSRF, SSRF - finding the flaws before they do.</p>
+                </div>
+                <div class="reactor-core">
+                    <div class="core-icon"><i class="fas fa-code"></i></div>
+                    <h3>WEB ADVANCED</h3>
+                    <p>React, Node.js, WebAssembly, progressive web apps.</p>
+                </div>
+                <div class="reactor-core">
+                    <div class="core-icon"><i class="fas fa-robot"></i></div>
+                    <h3>AI SECURITY</h3>
+                    <p>Machine learning, adversarial attacks, AI model protection.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS SECTION - Portals -->
+        <section id="projects" style="margin-top: 150px;">
+            <h2 class="glitch-title" style="font-size: 3rem; text-align: center;">> QUANTUM PROJECTS</h2>
+            <div class="project-portal">
+                <div class="portal-card">
+                    <div class="project-hologram"><i class="fas fa-dragon"></i></div>
+                    <h3>PROTOCOL X</h3>
+                    <p>Encrypted puzzle game with 50 levels. Crack the code.</p>
+                    <div style="margin-top: 15px; color: var(--secondary);">[ ACTIVE ]</div>
+                </div>
+                <div class="portal-card">
+                    <div class="project-hologram"><i class="fas fa-eye"></i></div>
+                    <h3>NEXUS SCANNER</h3>
+                    <p>AI-powered vulnerability scanner for modern web apps.</p>
+                    <div style="margin-top: 15px; color: var(--secondary);">[ BETA ]</div>
+                </div>
+                <div class="portal-card">
+                    <div class="project-hologram"><i class="fas fa-ghost"></i></div>
+                    <h3>GHOST PROTOCOL</h3>
+                    <p>Anonymous communication tool with quantum encryption.</p>
+                    <div style="margin-top: 15px; color: var(--secondary);">[ CLASSIFIED ]</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION - Neural Interface -->
+        <section id="contact" style="margin-top: 150px;">
+            <h2 class="glitch-title" style="font-size: 3rem; text-align: center;">> NEURAL_INTERFACE</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 50px;">
+                <div>
+                    <div class="contact-item" style="display: flex; gap: 20px; margin-bottom: 30px;">
+                        <i class="fas fa-envelope" style="font-size: 2rem; color: var(--secondary);"></i>
+                        <div>
+                            <h4>QUANTUM MAIL</h4>
+                            <p>psosoej210@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item" style="display: flex; gap: 20px;">
+                        <i class="fas fa-phone-alt" style="font-size: 2rem; color: var(--secondary);"></i>
+                        <div>
+                            <h4>SECURE LINE</h4>
+                            <p>+213 795 889 151</p>
+                        </div>
+                    </div>
+                </div>
+                <form class="neural-form" id="contactForm">
+                    <input type="text" class="neural-input" placeholder="> ENTER YOUR ID" required>
+                    <input type="email" class="neural-input" placeholder="> QUANTUM MAIL" required>
+                    <textarea class="neural-input" rows="5" placeholder="> TRANSMIT MESSAGE..."></textarea>
+                    <button type="submit" class="neural-button">[ TRANSMIT ]</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="cyber-footer">
+            <div style="text-align: center;">
+                <p>© 2026 XSSER01 // NEXUS CORE v2.0</p>
+                <p style="color: var(--secondary); margin-top: 20px;">> SYSTEM: ONLINE // FIREWALL: ACTIVE // TRACE: CLOAKED</p>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Audio Player مخفي لكن قوي -->
+    <audio id="bg-music" loop style="display: none;">
+        <source src="223.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // 1. PARTICLES BACKGROUND (أقوى من الماتريكس العادي)
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
+
+        function initParticles() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+
+            particles = [];
+            for (let i = 0; i < 100; i++) {
+                particles.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    radius: Math.random() * 2 + 1,
+                    speedX: (Math.random() - 0.5) * 0.8,
+                    speedY: (Math.random() - 0.5) * 0.8,
+                    color: `hsl(${Math.random() * 60 + 180}, 100%, 50%)` // أزرق/بنفسجي/وردي
+                });
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, width, height);
+            ctx.fillStyle = 'rgba(3, 0, 20, 0.1)';
+            ctx.fillRect(0, 0, width, height);
+
+            particles.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = p.color;
+                ctx.shadowColor = p.color;
+                ctx.shadowBlur = 15;
+                ctx.fill();
+
+                // حركة
+                p.x += p.speedX;
+                p.y += p.speedY;
+
+                // الحدود
+                if (p.x < 0 || p.x > width) p.speedX *= -1;
+                if (p.y < 0 || p.y > height) p.speedY *= -1;
+
+                // وصل الجسيمات بخطوط إذا كانت قريبة
+                particles.forEach(p2 => {
+                    const dx = p.x - p2.x;
+                    const dy = p.y - p2.y;
+                    const distance = Math.sqrt(dx*dx + dy*dy);
+                    if (distance < 120) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(0, 240, 255, ${0.2 - distance/600})`;
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.stroke();
+                    }
+                });
+            });
+
+            requestAnimationFrame(animateParticles);
+        }
+
+        window.addEventListener('resize', () => {
+            initParticles();
+        });
+
+        initParticles();
+        animateParticles();
+
+        // 2. TYPING QUANTUM EFFECT
+        const typingElement = document.getElementById('quantum-typing');
+        const phrases = [
+            "> ACCESSING MAINFRAME...",
+            "> QUANTUM DECRYPTION ACTIVE",
+            "> BYPASSING FIREWALLS",
+            "> ROOT ACCESS: GRANTED",
+            "> XSSER01 // ONLINE"
+        ];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function typeQuantum() {
+            const currentPhrase = phrases[phraseIndex];
+
+            if (isDeleting) {
+                typingElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingElement.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                isDeleting = true;
+                setTimeout(typeQuantum, 2000);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                setTimeout(typeQuantum, 500);
+            } else {
+                setTimeout(typeQuantum, isDeleting ? 50 : 100);
+            }
+        }
+
+        setTimeout(typeQuantum, 1000);
+
+        // 3. AUDIO - تشغيل تلقائي قوي
+        const audio = document.getElementById('bg-music');
+        audio.volume = 0.3;
+
+        function attemptPlay() {
+            audio.play().catch(() => {
+                // إذا منع المتصفح، نشغل عند أول تفاعل
+                document.addEventListener('click', function playOnce() {
+                    audio.play();
+                    document.removeEventListener('click', playOnce);
+                });
+            });
+        }
+
+        window.addEventListener('load', () => {
+            setTimeout(attemptPlay, 1000);
+        });
+
+        // 4. تأثيرات إضافية: تحريك الهولوجرام بالماوس
+        document.addEventListener('mousemove', (e) => {
+            const hologram = document.querySelector('.hologram');
+            if (hologram) {
+                const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+                const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+                hologram.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+            }
+        });
+
+        // 5. محاكاة فتح رابط عند إرسال النموذج
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            window.location.href = 'mailto:psosoej210@gmail.com';
+            alert('[MESSAGE TRANSMITTED] // REDIRECTING TO QUANTUM MAIL');
+        });
+
+        // 6. GLITCH العشوائي
+        setInterval(() => {
+            const titles = document.querySelectorAll('.glitch-title');
+            titles.forEach(t => {
+                t.style.transform = `skew(${Math.random() * 10 - 5}deg)`;
+                setTimeout(() => {
+                    t.style.transform = 'skew(0)';
+                }, 200);
+            });
+        }, 3000);
+
+        console.log('%c[SYSTEM] NEXUS ACTIVATED // WELCOME XSSER01', 'color: #00f0ff; font-size: 16px;');
+    </script>
+</body>
+</html>
